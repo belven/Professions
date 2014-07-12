@@ -1,0 +1,46 @@
+name: BelvensProfessions
+main: belven.professions.ProfessionManager
+version: 1
+
+commands:
+   bpfarmer:
+      description: This will change your profession to a farmer
+      usage: /bpfarmer 
+      permission: BelvensProfessions.bpfarmer
+      permission-message: You don't have BelvensProfessions.bpfarmer
+   bphunter:
+      description: This will change your profession to a hunter
+      usage: /bphunter 
+      permission: BelvensProfessions.bphunter
+      permission-message: You don't have BelvensProfessions.bphunter
+   bpminer:
+      description: This will change your profession to a miner
+      usage: /bpminer 
+      permission: BelvensProfessions.bpminer
+      permission-message: You don't have BelvensProfessions.bpminer
+   listprofessions:
+      description: Lists all the current players professions
+      usage: /listprofessions 
+      permission: BelvensProfessions.listprofessions
+      permission-message: You don't have BelvensProfessions.listprofessions
+
+permissions:
+    BelvensProfessions.*:
+        description: Gives access to all of BelvensProfessions commands
+        children:
+            BelvensProfessions.bpfarmer: true
+            BelvensProfessions.bphunter: true
+            BelvensProfessions.listprofessions: true
+            BelvensProfessions.bpminer: true
+    BelvensProfessions.bpfarmer:
+        description: This will change your profession to a farmer
+        default: true
+    BelvensProfessions.bphunter:
+        description: This will change your profession to a hunter
+        default: true
+    BelvensProfessions.bpminer:
+        description: This will change your profession to a miner
+        default: true
+    BelvensProfessions.listprofessions:
+        description: Lists all the current players professions
+        default: true
