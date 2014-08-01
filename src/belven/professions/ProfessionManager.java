@@ -18,6 +18,7 @@ public class ProfessionManager extends JavaPlugin
 
     public HashMap<Player, Profession> CurrentPlayerProfessions = new HashMap<Player, Profession>();
 
+    @SuppressWarnings("deprecation")
     @Override
     public void onEnable()
     {
@@ -63,6 +64,7 @@ public class ProfessionManager extends JavaPlugin
         }
     }
 
+    @SuppressWarnings("deprecation")
     public boolean onCommand(CommandSender sender, Command cmd, String label,
             String[] args)
     {

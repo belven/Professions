@@ -37,7 +37,7 @@ public class Farmer extends Profession
 
             if (functions.isAHoe(pOwner.getItemInHand().getType()))
             {
-                if (t == Material.CROPS && b instanceof Crops)
+                if (t == Material.CROPS)
                 {
                     Crops currentCrop = (Crops) b;
 

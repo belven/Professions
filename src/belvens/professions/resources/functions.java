@@ -127,6 +127,7 @@ public class functions
         case "GOLD_HOE":
             return true;
         case "DIAMOND_HOE":
+            return true;
         default:
             return false;
         }
@@ -157,8 +158,8 @@ public class functions
         default:
             return false;
         }
-    } 
-    
+    }
+
     public static boolean isForesterBlock(Material material)
     {
         switch (material.toString())
