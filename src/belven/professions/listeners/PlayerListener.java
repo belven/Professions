@@ -8,14 +8,14 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 
-import belven.professions.Farmer;
 import belven.professions.Hunter;
-import belven.professions.Miner;
 import belven.professions.Profession;
 import belven.professions.ProfessionManager;
 
@@ -68,30 +68,22 @@ public class PlayerListener implements Listener
     @EventHandler
     public void onBlockBreakEvent(BlockBreakEvent event)
     {
-        if (!event.isCancelled() && event.getPlayer() != null)
-        {
-            Player pl = event.getPlayer();
-            Profession p = plugin.CurrentPlayerProfessions.get(pl);
+        plugin.CurrentPlayerProfessions.get(event.getPlayer()).BlockBreakEvent(
+                event);
+    }
 
-            if (p != null)
-            {
-                if (p instanceof Farmer)
-                {
-                    ((Farmer) p).BlockBreakEvent(event);
-                }
-                else if (p instanceof Miner)
-                {
-                    ((Miner) p).BlockBreakEvent(event);
-                }
-            }
-        }
+    @EventHandler
+    public void onBlockPlaceEvent(BlockPlaceEvent event)
+    {
+        event.getBlockPlaced().setMetadata("Player Placed",
+                new FixedMetadataValue(plugin, "Player Placed"));
     }
 
     @EventHandler
     public void onEntityDeathEvent(EntityDeathEvent event)
     {
         EntityDamageEvent ede = event.getEntity().getLastDamageCause();
-        //Player currentPlayer;
+        // Player currentPlayer;
 
         if (ede == null)
         {

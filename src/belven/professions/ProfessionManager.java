@@ -13,8 +13,6 @@ import belven.professions.listeners.PlayerListener;
 public class ProfessionManager extends JavaPlugin
 {
     private final PlayerListener playerListener = new PlayerListener(this);
-    // private final BlockListener blockListener = new BlockListener(this);
-    // private final MobListener mobListener = new MobListener(this);
 
     public HashMap<Player, Profession> CurrentPlayerProfessions = new HashMap<Player, Profession>();
 
@@ -87,6 +85,11 @@ public class ProfessionManager extends JavaPlugin
             this.SetProfession(player, "Miner");
             return true;
         }
+        else if (commandSent.equalsIgnoreCase("bpforester"))
+        {
+            this.SetProfession(player, "Forester");
+            return true;
+        }
         else if (commandSent.equalsIgnoreCase("listprofessions"))
         {
             if (currentPlayers != null)
@@ -127,6 +130,8 @@ public class ProfessionManager extends JavaPlugin
             return new Hunter(player, this);
         case "miner":
             return new Miner(player, this);
+        case "forester":
+            return new Forester(player, this);
         default:
             return new Default(player, this);
         }
@@ -150,7 +155,6 @@ public class ProfessionManager extends JavaPlugin
     @Override
     public void onDisable()
     {
-        getLogger().info("Goodbye world!");
         this.saveConfig();
     }
 

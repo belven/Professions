@@ -13,6 +13,11 @@ commands:
       usage: /bphunter 
       permission: BelvensProfessions.bphunter
       permission-message: You don't have BelvensProfessions.bphunter
+   bpforester:
+      description: This will change your profession to a forester
+      usage: /bpforester
+      permission: BelvensProfessions.bpforester
+      permission-message: You don't have BelvensProfessions.bpforester
    bpminer:
       description: This will change your profession to a miner
       usage: /bpminer 
@@ -32,8 +37,12 @@ permissions:
             BelvensProfessions.bphunter: true
             BelvensProfessions.listprofessions: true
             BelvensProfessions.bpminer: true
+            BelvensProfessions.bpforester: true
     BelvensProfessions.bpfarmer:
         description: This will change your profession to a farmer
+        default: true
+    BelvensProfessions.bpforester:
+        description: This will change your profession to a forester
         default: true
     BelvensProfessions.bphunter:
         description: This will change your profession to a hunter

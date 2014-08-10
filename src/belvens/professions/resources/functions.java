@@ -2,7 +2,8 @@ package belvens.professions.resources;
 
 import org.bukkit.Material;
 
-public class functions{
+public class functions
+{
 
     public static boolean isAHoe(Material material)
     {
@@ -57,6 +58,7 @@ public class functions{
         case "LOG":
             return true;
         case "LEAVES":
+            return true;
         default:
             return false;
         }
@@ -81,6 +83,8 @@ public class functions{
         case "EMERALD_ORE":
             return true;
         case "QUARTZ_ORE":
+            return true;
+        case "OBSIDIAN":
             return true;
         default:
             return false;
