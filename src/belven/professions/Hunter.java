@@ -25,9 +25,8 @@ public class Hunter extends Profession
         {
             int ran = rand.nextInt(3);
             ran++;
-
             ItemStack is = eventDrops.next();
-            event.getDrops().add(new ItemStack(is.getType(), ran));
+            is.setAmount(is.getAmount() + ran);
         }
 
     }
