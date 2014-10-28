@@ -2,6 +2,7 @@ package belven.professions;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDeathEvent;
 
 public abstract class Profession {
 	public Player pOwner = null;
@@ -24,8 +25,13 @@ public abstract class Profession {
 			return true;
 		} else if (!(other instanceof Class)) {
 			return false;
-		} else
+		} else {
 			return false;
+		}
+	}
+
+	public void EntityDeathEvent(EntityDeathEvent event) {
+
 	}
 
 }

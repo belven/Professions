@@ -1,10 +1,14 @@
 package belven.professions.listeners;
 
+import java.util.Iterator;
+
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -13,9 +17,9 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.metadata.FixedMetadataValue;
 
-import belven.professions.Hunter;
 import belven.professions.Profession;
 import belven.professions.ProfessionManager;
 
@@ -61,45 +65,31 @@ public class PlayerListener implements Listener {
 		event.getBlockPlaced().setMetadata("Player Placed", new FixedMetadataValue(plugin, "Player Placed"));
 	}
 
-	@EventHandler
+	@EventHandler(priority = EventPriority.LOWEST)
 	public void onEntityDeathEvent(EntityDeathEvent event) {
 		EntityDamageEvent ede = event.getEntity().getLastDamageCause();
-		// Player currentPlayer;
 
-		if (ede == null) {
-			return;
-		}
-
-		if (ede.getEntity() instanceof LivingEntity) {
+		// TODO Fix for Player drops
+		if (ede != null && ede.getEntity() instanceof LivingEntity && ede.getEntity().getType() != EntityType.PLAYER) {
 			LivingEntity damager = (LivingEntity) ede.getEntity();
 
-			Player pl = (Player) damager.getKiller();
+			Player pl = damager.getKiller();
 			Profession p = plugin.CurrentPlayerProfessions.get(pl);
 
 			if (p != null) {
-				if (p instanceof Hunter) {
-					((Hunter) p).EntityDeathEvent(event);
+				p.EntityDeathEvent(event);
+
+				Iterator<ItemStack> eventDrops = event.getDrops().iterator();
+
+				while (eventDrops.hasNext()) {
+					ItemStack is = eventDrops.next();
+					if (is.getMaxStackSize() != 1) {
+						p.pOwner.getInventory().addItem(is);
+					}
 				}
+
+				event.getDrops().clear();
 			}
 		}
-		// else if (ede.getEntity().getType() == EntityType.ARROW)
-		// {
-		// Arrow currentArrow = (Arrow) ede.getEntity();
-		//
-		// if (currentArrow.getShooter().getType() == EntityType.PLAYER)
-		// {
-		// currentPlayer = (Player) currentArrow.getShooter();
-		// if (currentPlayer != null)
-		// {
-		// Profession p = plugin.CurrentPlayerProfessions
-		// .get(currentPlayer);
-		// if (p instanceof Hunter)
-		// {
-		// ((Hunter) currentPlayer).EntityDeathEvent(event);
-		// }
-		// }
-		// }
-		// }
-
 	}
 }
