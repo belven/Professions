@@ -36,13 +36,21 @@ public class Farmer extends Profession {
 					Crops currentCrop = (Crops) b;
 
 					if (currentCrop.getState() == CropState.RIPE) {
-						pOwner.getInventory().addItem(new ItemStack(Material.WHEAT, ran));
-						pOwner.getInventory().addItem(new ItemStack(Material.SEEDS, ran));
+						for (ItemStack is : b.getDrops()) {
+							is.setAmount(is.getAmount() + ran);
+							pOwner.getInventory().addItem(is);
+						}
 					}
 				} else if (t == Material.POTATO) {
-					pOwner.getInventory().addItem(new ItemStack(Material.POTATO_ITEM, ran));
+					for (ItemStack is : b.getDrops()) {
+						is.setAmount(is.getAmount() + ran);
+						pOwner.getInventory().addItem(is);
+					}
 				} else if (t == Material.CARROT) {
-					pOwner.getInventory().addItem(new ItemStack(Material.CARROT_ITEM, ran));
+					for (ItemStack is : b.getDrops()) {
+						is.setAmount(is.getAmount() + ran);
+						pOwner.getInventory().addItem(is);
+					}
 				}
 			} else if (t == Material.MELON_BLOCK) {
 				pOwner.getInventory().addItem(new ItemStack(Material.MELON, ran));
