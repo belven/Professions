@@ -1,6 +1,7 @@
 name: BelvensProfessions
 main: belven.professions.ProfessionManager
 version: 1
+depend: [Resources]
 
 commands:
    bpfarmer:
