@@ -1,5 +1,6 @@
 package belven.professions;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 import org.bukkit.command.Command;
@@ -15,13 +16,12 @@ public class ProfessionManager extends JavaPlugin {
 
 	public HashMap<Player, Profession> CurrentPlayerProfessions = new HashMap<Player, Profession>();
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(playerListener, this);
 
-		if (this.getServer().getOnlinePlayers().length > 0) {
+		if (this.getServer().getOnlinePlayers().size() > 0) {
 			for (Player currentPlayer : this.getServer().getOnlinePlayers()) {
 				if (currentPlayer != null) {
 					AddProfessionToPlayer(currentPlayer);
@@ -40,18 +40,18 @@ public class ProfessionManager extends JavaPlugin {
 			String ProfessionString = this.getConfig().getString(PlayerName + ".Profession");
 
 			if (ProfessionString != null) {
-				if (CurrentPlayerProfessions.get(playerToAdd) == null)
-
+				if (CurrentPlayerProfessions.get(playerToAdd) == null) {
 					CurrentPlayerProfessions.put(playerToAdd, StringToProfession(ProfessionString, playerToAdd));
+				}
 			}
 
 			this.getServer().broadcastMessage(PlayerName + " was given Profession " + ProfessionString);
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		Player[] currentPlayers = this.getServer().getOnlinePlayers();
+		Collection<? extends Player> currentPlayers = this.getServer().getOnlinePlayers();
 		Player player = (Player) sender;
 		String commandSent = cmd.getName();
 
@@ -80,12 +80,12 @@ public class ProfessionManager extends JavaPlugin {
 				}
 
 				return true;
-			} else
+			} else {
 				return false;
-		}
-
-		else
+			}
+		} else {
 			return false;
+		}
 	}
 
 	public Profession StringToProfession(String professionName, Player player) {
